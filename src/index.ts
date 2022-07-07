@@ -1,4 +1,4 @@
-const months = [
+const months: string[] = [
   'January',
   'February',
   'March',
@@ -12,7 +12,7 @@ const months = [
   'November',
   'December',
 ];
-const weekdays = [
+const weekdays: string[] = [
   'Sunday',
   'Monday',
   'Tuesday',
@@ -21,28 +21,28 @@ const weekdays = [
   'Friday',
   'Saturday',
 ];
-const giveaway = document.querySelector('.giveaway');
-const deadline = document.querySelector('.deadline');
+const giveaway = document.querySelector<HTMLHeadingElement>('.giveaway');
+const deadline = document.querySelector<HTMLDivElement>('.deadline');
 const items = document.querySelectorAll('.deadline-format h4');
 
 let tempDate = new Date();
-let tempYear = tempDate.getFullYear();
-let tempMonth = tempDate.getMonth();
-let tempDay = tempDate.getDate();
+let tempYear: number = tempDate.getFullYear();
+let tempMonth: number = tempDate.getMonth();
+let tempDay: number = tempDate.getDate();
 // months are ZERO index based;
 const futureDate = new Date(tempYear, tempMonth, tempDay + 10, 11, 30, 0);
 
 // let futureDate = new Date(2020, 3, 24, 11, 30, 0);
 
-const year = futureDate.getFullYear();
-const hours = futureDate.getHours();
-const minutes = futureDate.getMinutes();
+const year: number = futureDate.getFullYear();
+const hours: number = futureDate.getHours();
+const minutes: number = futureDate.getMinutes();
 
-let month = futureDate.getMonth();
-month = months[month];
+let month: number = futureDate.getMonth();
+let monthSelected = months[month];
 const weekday = weekdays[futureDate.getDay()];
 const date = futureDate.getDate();
-giveaway.textContent = `giveaway ends on ${weekday}, ${date} ${month} ${year} ${hours}:${minutes}am`;
+giveaway!.textContent = `giveaway ends on ${weekday}, ${date} ${monthSelected} ${year} ${hours}:${minutes}am`;
 
 const futureTime = futureDate.getTime();
 function getRemaindingTime() {
@@ -66,7 +66,7 @@ function getRemaindingTime() {
 
   // set values array
   const values = [days, hours, minutes, seconds];
-  function format(item) {
+  function format(item: any) {
     if (item < 10) {
       return (item = `0${item}`);
     }
@@ -79,7 +79,7 @@ function getRemaindingTime() {
 
   if (t < 0) {
     clearInterval(countdown);
-    deadline.innerHTML = `<h4 class="expired">sorry, this giveaway has expired!</h4>`;
+    deadline!.innerHTML = `<h4 class="expired">sorry, this giveaway has expired!</h4>`;
   }
 }
 // countdown;
